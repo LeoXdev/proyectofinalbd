@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD</title>
+    <link rel="stylesheet" href="static/style.css">
+    <script defer src="static/scripts.js"></script>
+    <!-- Font awesome icons CDN v4.7-->
+    <!-- Para ver los íconos disponibles: https://fontawesome.com/v4/icons/ -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+</head>
+<body>
+    <div class="header">
+        <h2 style="display: inline; padding-left: 2rem; margin-right: 0.4rem;">CREATE Nuevo alumno</h2>
+        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+    </div>
+    
+    <div id="create">
+        <form>
+            <label for="matricula">Matricula:</label>
+            <input id="create-matricula" type="text" required> <br>
+            <label for="nombre">Nombre:</label>
+            <input id="create-nombre" type="text" required> <br>
+            <label for="Edad">Edad:</label>
+            <input id="create-edad" type="number" required> <br>
+            
+            <button id="create-submit" type="button">Crear</button> <br>
+        </form>
+    </div>
+    
+    <div class="header">
+        <h2 style="display: inline; padding-left: 2rem; margin-right: 0.4rem;">READ Lista de Alumnos</h2>
+        <i class="fa fa-users" aria-hidden="true"></i>
+    </div>
+    
+    <div id="read">
+        <!--Leo Toviaz, [Editar/lapiz][Borrar/basura]-->
+        <ul>
+            {{range .Alumnos}}
+                <li style="display: inline; min-width: 70%; background-color: cornsilk;">
+                    {{.Matricula}}, {{.Nombre}} {{.Edad}}
+                </li> <br>
+            {{end}}
+            <!-- Este bloque se mostrará si existen más de 50 entradas en la base de datos.
+                 No se renderizarán todas las entradas pero están seguiran existiendo en la
+                 base de datos y podrán seguir siendo buscada con la opción Read. -->
+            {{if gt (len .Alumnos) 50}}
+                <li style="display: inline; min-width: 70%; background-color: coral;">
+                ...
+                </li> <br>
+		    {{end}}
+        </ul>
+
+        <br><br>
+
+        <div class="header" style="background-color: cornflowerblue;">
+            <h3 style="display: inline; padding-left: 2rem; margin-right: 0.4rem;">Buscar alumno</h3>
+            <i class="fa fa-search" style="margin-left: 0.3em;" aria-hidden="true"></i>
+            <form>
+                <label for="matricula">Matricula:</label>
+                <input id="buscar-matricula" type="text" required>
+                
+                <button id="buscar-submit" style="display: inline; margin-left: 0.8r em;" type="button">Buscar</button> <br>
+            </form>            
+        </div>
+    </div>
+
+    <div class="header">
+        <h2 style="display: inline; padding-left: 2rem; margin-right: 0.4rem;">UPDATE Alumno existente</h2>
+        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+    </div>
+    
+    <div id="update">
+        <p style="display: inline; padding-left: 2rem; margin-right: 0.4rem;">Se actualizará un registro por matrícula.</p>
+        <form>
+            <label for="matricula">Matricula:</label>
+            <input id="update-matricula" type="text" required> <br>
+            <label for="nombre">Nombre:</label>
+            <input id="update-nombre" type="text" required> <br>
+            <label for="Edad">Edad:</label>
+            <input id="update-edad" type="number" required> <br>
+            
+            <button id="update-submit" type="button">Actualizar</button> <br>
+        </form>
+    </div>
+
+    <div class="header">
+        <h2 style="display: inline; padding-left: 2rem; margin-right: 0.4rem;">DELETE Alumno existente</h2>
+        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+    </div>
+    
+    <div id="delete">
+        <p style="display: inline; padding-left: 2rem; margin-right: 0.4rem;">Se eliminará un registro por matrícula.</p>
+        <form>
+            <label for="matricula">Matricula:</label>
+            <input id="delete-matricula" type="text" required> <br>
+            
+            <button id="delete-submit" type="button">Eliminar</button> <br>
+        </form>
+    </div>
+</body>
+</html>
